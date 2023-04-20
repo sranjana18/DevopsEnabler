@@ -5,7 +5,7 @@ pipeline{
             steps{
                 sh '''
                     echo "buildinng image"
-                    docker image build -t image8 ${WORKSPACE}/docker
+                    docker image build -t image6 ${WORKSPACE}/docker
                     '''
             }
         }
@@ -13,7 +13,7 @@ pipeline{
             steps{
                 sh '''
                     echo "taggig image"
-                    docker image tag image8:latest ranjana000/image8:latest
+                    docker image tag image6:latest ranjana000/image6:latest
                     '''
             }
         }
@@ -21,7 +21,7 @@ pipeline{
             steps{
                 sh '''
                     docker login -u ranjana000 -p shrinidhi@1
-                    docker image push ranjana000/image8:latest
+                    docker image push ranjana000/image6:latest
                     '''
             }
         }
@@ -29,7 +29,7 @@ pipeline{
             steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name c8 ranjana000/image1:latest bash
+                    docker container run -d --name c6 ranjana000/image6:latest bash
                     '''
             }
         }
