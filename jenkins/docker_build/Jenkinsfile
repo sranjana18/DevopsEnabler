@@ -1,0 +1,37 @@
+pipeline{
+    agent any 
+    stages{
+        stage('image_build'){
+            steps{
+                sh '''
+                    echo "buildinng image"
+                    docker image build -t image3 ${WORKSPACE}/docker
+                    '''
+            }
+        }
+        stage('image_tagging'){
+            steps{
+                sh '''
+                    echo "taggig image"
+                    docker image tag image3:latest ranjana000/image3:latest
+                    '''
+            }
+        }
+        stage('image_push'){
+            steps{
+                sh '''
+                    docker login -u ranjana000 -p shrinidhi@1
+                    docker image push ranjana000/image1:latest
+                    '''
+            }
+        }
+        stage('deploy'){
+            steps{
+                sh '''
+                    echo "creating container..."
+                    docker container run -d --name c8 ranjana000/image1:latest bash
+                    '''
+            }
+        }
+    }
+}
