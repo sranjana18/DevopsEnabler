@@ -5,7 +5,7 @@ pipeline{
             steps{
                 sh '''
                     echo "buildinng image"
-                    docker image build -t image3 ${WORKSPACE}/docker
+                    docker image build -t image8 ${WORKSPACE}/docker
                     '''
             }
         }
@@ -13,7 +13,7 @@ pipeline{
             steps{
                 sh '''
                     echo "taggig image"
-                    docker image tag image3:latest ranjana000/image3:latest
+                    docker image tag image8:latest ranjana000/image8:latest
                     '''
             }
         }
@@ -21,7 +21,7 @@ pipeline{
             steps{
                 sh '''
                     docker login -u ranjana000 -p shrinidhi@1
-                    docker image push ranjana000/image1:latest
+                    docker image push ranjana000/image8:latest
                     '''
             }
         }
