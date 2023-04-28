@@ -4,7 +4,7 @@ pipeline{
         stage ('Code build and Static Code Analysis'){
             steps{
                 script{
-                     withSonarQubeEnv('sonarqube-9.0') {
+                     withSonarQubeEnv('sonarqubeserver') {
                          sh "mvn sonar:sonar"
                      }
                     
