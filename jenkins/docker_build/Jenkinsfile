@@ -1,19 +1,7 @@
 pipeline{
     agent any 
     stages{
-        stage ('Code build and Static Code Analysis'){
-            steps{
-                script{
-                     withSonarQubeEnv('sonarqubeserver') {
-                         sh "mvn sonar:sonar"
-                     }
-                    
-                     sh "mvn clean install"
-                 }
-             }
-        }
-
-        stage('image_build'){
+       stage('image_build'){
             steps{
                 sh '''
                     echo "buildinng image"
