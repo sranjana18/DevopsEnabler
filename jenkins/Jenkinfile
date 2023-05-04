@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    environment {
+        PATH = "$PATH:/usr/share/maven"
+    }
     stages{
        stage('image_build'){
             steps{
@@ -7,6 +10,18 @@ pipeline{
                     echo "buildinng image"
                     docker image build -t image2 ${WORKSPACE}/docker
                     '''
+            }
+        }
+        stage('Build'){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage('SonarQube analysis') { 
+            steps{
+                withSonarQubeEnv('sonarqube-server'){
+                sh "mvn sonar:sonar"
+                }
             }
         }
         stage('image_tagging'){
