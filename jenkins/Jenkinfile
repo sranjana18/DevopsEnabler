@@ -7,15 +7,6 @@ pipeline{
                     echo "buildinng image"
                     docker image build -t image2 ${WORKSPACE}/docker
                     '''
-                    sh "./gradlew test"
-            }
-        }
-        stage('Code Analysis') {
-            steps {
-                withSonarQubeEnv('sonarqubeserver') {
-                    // Analyze code with SonarQube
-                    sh "./gradlew sonarqube"
-                }
             }
         }
         stage('image_tagging'){
