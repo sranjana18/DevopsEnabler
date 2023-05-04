@@ -17,7 +17,7 @@ pipeline{
                 sh 'mvn clean package'
             }
         }
-        stage('SonarQube analysis') { 
+        stage('SonarQube analysis') {
             steps{
                 withSonarQubeEnv('sonarqube-server'){
                 sh "mvn sonar:sonar"
@@ -41,7 +41,7 @@ pipeline{
             }
         }
         stage('deploy'){
-            steps{
+             steps{
                 sh '''
                     echo "creating container..."
                     docker container run -d --name container2 ranjana000/image2:latest bash
