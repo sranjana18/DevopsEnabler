@@ -1,27 +1,21 @@
 pipeline{
     agent any
-    tools { 
-        maven 'maven-3.6.3' 
-    }
     stages{
-       stage ('Build & JUnit Test') {
-            steps {
-                sh 'mvn install' 
-            }
-       } 
-       stage('SonarQube Analysis'){
-            steps{
-                   withSonarQubeEnv(installationName: 'sonarqubeserver') {
-                        sh 'mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
-                    }
-            }
-        }
        stage('image_build'){
             steps{
                 sh '''
                     echo "buildinng image"
                     docker image build -t image2 ${WORKSPACE}/docker
                     '''
+                    sh "./gradlew test"
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                withSonarQubeEnv('My SonarQube Server') {
+                    // Analyze code with SonarQube
+                    sh "./gradlew sonarqube"
+                }
             }
         }
         stage('image_tagging'){
