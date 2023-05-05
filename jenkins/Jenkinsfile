@@ -21,7 +21,6 @@ pipeline{
             steps{
                 withSonarQubeEnv('sonarqube-server'){
                 sh 'mvn clean install sonar:sonar -Dsonar.projectKey=NewProject'
-                sh "mvn sonar:sonar"
                 }
             }
         }
