@@ -44,10 +44,19 @@ pipeline{
              steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name container9 ranjana000/sonarimg:latest bash
+                    docker container run -d --name container6 ranjana000/sonarimg:latest bash
                     '''
             }
         }
     }
+    post {
+        always {
+            // Configure Maven to register binaries with SonarQube
+            withSonarQubeEnv('SonarQube') {
+                sh 'mvn sonar:deploy'
+            }
+        }
+    }
+
 }
 
