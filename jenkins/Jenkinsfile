@@ -8,7 +8,7 @@ pipeline{
             steps{
                 sh '''
                     echo "buildinng image"
-                    docker image build -t image2 ${WORKSPACE}/docker
+                    docker image build -t sonarimg ${WORKSPACE}/docker
                     '''
             }
         }
@@ -28,7 +28,7 @@ pipeline{
             steps{
                 sh '''
                     echo "taggig image"
-                    docker image tag image2:latest ranjana000/image2:latest
+                    docker image tag sonarimg:latest ranjana000/sonarimg:latest
                     '''
             }
         }
@@ -36,7 +36,7 @@ pipeline{
             steps{
                 sh '''
                     docker login -u ranjana000 -p shrinidhi@1
-                    docker image push ranjana000/image2:latest
+                    docker image push ranjana000/sonarimg:latest
                     '''
             }
         }
@@ -44,7 +44,7 @@ pipeline{
              steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name container2 ranjana000/image2:latest bash
+                    docker container run -d --name container9 ranjana000/sonarimg:latest bash
                     '''
             }
         }
