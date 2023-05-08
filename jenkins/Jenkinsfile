@@ -8,7 +8,7 @@ pipeline{
             steps{
                 sh '''
                     echo "buildinng image"
-                    docker image build -t sonarimg ${WORKSPACE}/docker
+                    docker image build -t image6 ${WORKSPACE}/docker
                     '''
             }
         }
@@ -28,7 +28,7 @@ pipeline{
             steps{
                 sh '''
                     echo "taggig image"
-                    docker image tag sonarimg:latest ranjana000/sonarimg:latest
+                    docker image tag image6:latest ranjana000/image6:latest
                     '''
             }
         }
@@ -36,7 +36,7 @@ pipeline{
             steps{
                 sh '''
                     docker login -u ranjana000 -p shrinidhi@1
-                    docker image push ranjana000/sonarimg:latest
+                    docker image push ranjana000/image6:latest
                     '''
             }
         }
@@ -44,16 +44,8 @@ pipeline{
              steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name container3 ranjana000/sonarimg:latest bash
+                    docker container run -d --name container5 ranjana000/image6:latest bash
                     '''
-            }
-        }
-    }
-    post {
-        always {
-            // Configure Maven to register binaries with SonarQube
-            withSonarQubeEnv('soarqube-server') {
-                sh 'mvn sonar:deploy'
             }
         }
     }
