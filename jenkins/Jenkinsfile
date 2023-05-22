@@ -20,7 +20,7 @@ pipeline{
         stage('SonarQube analysis') {
             steps{
                 withSonarQubeEnv('sonarqube-server'){
-                sh 'mvn clean install sonar:sonar -Dsonar.projectKey=NewProject'
+                sh 'mvn clean install sonar:sonar -Dsonar.projectKey=project1'
                 }
             }
         }
