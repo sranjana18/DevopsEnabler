@@ -51,7 +51,7 @@ pipeline{
              steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name container11 ranjana000/image6:latest bash
+                    docker container run -d --name container15 -p 8082:8082 ranjana000/image6:latest bash
                     '''
             }
         }
