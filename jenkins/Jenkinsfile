@@ -26,7 +26,7 @@ pipeline{
         }
         stage('OwASP_SCAN'){
             steps{
-                dependencyCheck addiionalArguements:' --scan ./ ', odInstallation: 'DP-check'
+                dependencyCheck addiionalArguements:' --scan ./ ', odcInstallation: 'DP-check'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
