@@ -24,6 +24,13 @@ pipeline{
                 }
             }
         }
+        stage('OwASP_SCAN'){
+            steps{
+                dependencyCheck addiionalArguements:' --scan ./ ', odInstallation: 'DP-check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+
         stage('image_tagging'){
             steps{
                 sh '''
@@ -44,7 +51,7 @@ pipeline{
              steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name container5 ranjana000/image6:latest bash
+                    docker container run -d --name container11 ranjana000/image6:latest bash
                     '''
             }
         }
