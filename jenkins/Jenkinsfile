@@ -3,6 +3,7 @@ pipeline{
     environment {
         PATH = "$PATH:/usr/share/maven"
     }
+    stages{
         stage('Compile'){
             steps{
                 sh 'mvn clean package'
@@ -56,6 +57,4 @@ pipeline{
             }
         }
     }
-
 }
-
