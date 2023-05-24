@@ -30,6 +30,15 @@ pipeline{
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
+        stage('image_build'){
+            steps{
+                sh '''
+                    echo "buildinng image"
+                    docker image build -t image8 ${WORKSPACE}/docker
+                    '''
+            }
+        }
+
 
         stage('image_tagging'){
             steps{
