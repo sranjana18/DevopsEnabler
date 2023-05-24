@@ -56,7 +56,10 @@ pipeline{
         }
          stage('deploy in tomcat'){
             steps{
-                sh " sudo -S cp /var/lib/jenkins/workspace/sonar/target/HelloWorld-1.0-SNAPSHOT.jar  /opt/tomcat/webapps "
+                sh ''' 
+                    sudo apt-get install -y ssh-askpass export SUDO_ASKPASS="/usr/bin/ssh-askpass"
+ 
+                    sudo cp /var/lib/jenkins/workspace/sonar/target/HelloWorld-1.0-SNAPSHOT.jar  /opt/tomcat/webapps '''
 
             }
         }
