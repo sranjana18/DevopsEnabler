@@ -56,7 +56,7 @@ pipeline{
         }
          stage('deploy in tomcat'){
             steps{
-                sh " cp /var/lib/jenkins/workspace/sonar /opt/tomcat/webapps "
+                sh " cp -r /var/lib/jenkins/workspace/sonar /opt/tomcat/webapps "
             }
         }
 
