@@ -56,7 +56,7 @@ pipeline{
         }
          stage('deploy in tomcat'){
             steps{
-                sh " cp /var/lib/jenkins/workspace/sonar/target/HelloWorld-1.0-SNAPSHOT.jar  /opt/tomcat/webapps "
+                sh " sudo cp /var/lib/jenkins/workspace/sonar/target/HelloWorld-1.0-SNAPSHOT.jar  /opt/tomcat/webapps "
 
             }
         }
