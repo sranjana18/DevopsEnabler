@@ -3,15 +3,6 @@ pipeline{
     environment {
         PATH = "$PATH:/usr/share/maven"
     }
-    stages{
-       stage('image_build'){
-            steps{
-                sh '''
-                    echo "buildinng image"
-                    docker image build -t image8 ${WORKSPACE}/docker
-                    '''
-            }
-        }
         stage('Compile'){
             steps{
                 sh 'mvn clean package'
