@@ -26,7 +26,7 @@ pipeline{
             steps{
                 sh '''
                     echo "buildinng image"
-                    docker image build -t sonarimage ${WORKSPACE}/docker
+                    docker image build -t newimg ${WORKSPACE}/docker
                     '''
             }
         }
@@ -36,7 +36,7 @@ pipeline{
             steps{
                 sh '''
                     echo "taggig image"
-                    docker image tag sonarimage:latest ranjana000/sonarimage:latest
+                    docker image tag newimg:latest ranjana000/newimg:latest
                     '''
             }
         }
@@ -44,13 +44,13 @@ pipeline{
             steps{
                 sh '''
                     docker login -u ranjana000 -p shrinidhi@1
-                    docker image push ranjana000/sonarimage:latest
+                    docker image push ranjana000/newimg:latest
                     '''
             }
         }
         stage('TRIVY'){
             steps{
-                sh " trivy image  ranjana000/sonarimage:latest "
+                sh " trivy image  ranjana000/newimg:latest "
 
             }
         }
@@ -58,7 +58,7 @@ pipeline{
              steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name app1 -p 8082:8082 ranjana000/sonarimage:latest bash
+                    docker container run -d --name app8 -p 8082:8082 ranjana000/newimg:latest bash
                     '''
             }
         }
