@@ -13,6 +13,7 @@ pipeline{
             steps{
                 withSonarQubeEnv('sonarqube-server'){
                 sh 'mvn clean install sonar:sonar -Dsonar.projectKey=project1'
+                sh 'sonarqube-scanner'
                 }
             }
         }
@@ -58,7 +59,7 @@ pipeline{
              steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name app8 -p 8082:8082 ranjana000/newimg:latest bash
+                    docker container run -d --name app9 -p 8082:8082 ranjana000/newimg:latest bash
                     '''
             }
         }
