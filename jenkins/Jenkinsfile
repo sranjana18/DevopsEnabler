@@ -55,12 +55,11 @@ pipeline{
 
             }
         }
-        stage('deploy'){
+        stage('deploy k8's'){
              steps{
-                sh '''
-                    echo "creating container..."
-                    docker container run -d --name app9 -p 8082:8082 ranjana000/newimg:latest bash
-                    '''
+                script{
+                     kubernetesDeploy(config: "deploymentservice.yml", kubeconfigId: "kubernetes")
+                }
             }
         }
     }
