@@ -55,6 +55,15 @@ pipeline{
 
             }
         }
+         stage('deploy'){
+            steps{
+                sh '''
+                    echo "creating container..."
+                    docker container run -d --name container2 -p 3000:3000 ranjana000/image2:latest bash
+                    '''
+            }
+        }
+
         stage('deploy k8's'){
              steps{
                 script{
