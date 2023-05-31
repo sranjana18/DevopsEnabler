@@ -13,7 +13,6 @@ pipeline{
             steps{
                 withSonarQubeEnv('sonarqube-server'){
                 sh 'mvn clean install sonar:sonar -Dsonar.projectKey=project1'
-                sh 'sonarqube-scanner'
                 }
             }
         }
