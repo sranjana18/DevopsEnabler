@@ -12,7 +12,7 @@ pipeline{
         stage('SonarQube analysis') {
             steps{
                 withSonarQubeEnv('sonarqube-server'){
-                sh 'mvn clean install sonar:sonar -Dsonar.projectKey=project1'
+                sh 'mvn clean install sonar:sonar -Dsonar.projectKey=project2'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline{
             steps{
                 sh '''
                     echo "buildinng image"
-                    docker image build -t newimg ${WORKSPACE}/docker
+                    docker image build -t newimg1 ${WORKSPACE}/docker
                     '''
             }
         }
@@ -36,7 +36,7 @@ pipeline{
             steps{
                 sh '''
                     echo "taggig image"
-                    docker image tag newimg:latest ranjana000/newimg:latest
+                    docker image tag newimg1:latest ranjana000/newimg1:latest
                     '''
             }
         }
@@ -44,13 +44,13 @@ pipeline{
             steps{
                 sh '''
                     docker login -u ranjana000 -p shrinidhi@1
-                    docker image push ranjana000/newimg:latest
+                    docker image push ranjana000/newimg1:latest
                     '''
             }
         }
         stage('TRIVY'){
             steps{
-                sh " trivy image  ranjana000/newimg:latest "
+                sh " trivy image  ranjana000/newimg1:latest "
 
             }
         }
@@ -58,7 +58,7 @@ pipeline{
             steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name container2 -p 3000:3000 ranjana000/image2:latest bash
+                    docker container run -d --name container7 -p 3000:3000 ranjana000/newimg1:latest bash
                     '''
             }
         }
